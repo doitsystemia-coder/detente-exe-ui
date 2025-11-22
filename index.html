@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détente Exé | Tableau de bord ERP</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">DX</div>
+      <div>
+        <p class="eyebrow">ERP Détente Exé</p>
+        <h1>Tableau de bord</h1>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="pill ghost">Notifications</button>
+      <button class="pill primary">+ Nouveau chantier</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel highlight">
+      <div class="panel-header">
+        <p class="eyebrow">Vue globale</p>
+        <h2>Performance hebdomadaire</h2>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <p class="label">Chantiers actifs</p>
+          <p class="value">18</p>
+          <div class="trend up">+3 depuis lundi</div>
+        </div>
+        <div class="kpi-card">
+          <p class="label">Tâches en cours</p>
+          <p class="value">124</p>
+          <div class="trend neutral">Progression 54%</div>
+        </div>
+        <div class="kpi-card">
+          <p class="label">Incidents SAV</p>
+          <p class="value">7</p>
+          <div class="trend down">-2 vs semaine dernière</div>
+        </div>
+        <div class="kpi-card">
+          <p class="label">Facturation à venir</p>
+          <p class="value">€142k</p>
+          <div class="trend up">+12% prévu</div>
+        </div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-block">
+          <div class="progress-head">
+            <span>Avancement global</span>
+            <span class="pill muted">72%</span>
+          </div>
+          <div class="progress-bar">
+            <span style="width:72%"></span>
+          </div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-head">
+            <span>Sécurité & conformité</span>
+            <span class="pill muted">94%</span>
+          </div>
+          <div class="progress-bar">
+            <span class="accent" style="width:94%"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <p class="eyebrow">Chantiers</p>
+        <h2>Suivi des projets</h2>
+        <button class="pill ghost">Filtrer</button>
+      </div>
+      <div class="table">
+        <div class="table-head">
+          <span>Chantier</span>
+          <span>Responsable</span>
+          <span>Phase</span>
+          <span>Échéance</span>
+          <span>Statut</span>
+        </div>
+        <div class="table-row">
+          <span>Campus Nord</span>
+          <span>S. Kermor</span>
+          <span>Gros œuvre</span>
+          <span>15 fév</span>
+          <span class="badge success">Dans les temps</span>
+        </div>
+        <div class="table-row">
+          <span>Résidence Quai</span>
+          <span>L. Benoît</span>
+          <span>Second œuvre</span>
+          <span>02 mars</span>
+          <span class="badge warning">Surveillance</span>
+        </div>
+        <div class="table-row">
+          <span>Hall Détente</span>
+          <span>M. Issa</span>
+          <span>Finitions</span>
+          <span>23 jan</span>
+          <span class="badge danger">Retard</span>
+        </div>
+        <div class="table-row">
+          <span>Complexe Sportif</span>
+          <span>C. Diallo</span>
+          <span>Études</span>
+          <span>12 avr</span>
+          <span class="badge info">Préparation</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel columns">
+      <div class="subpanel">
+        <div class="panel-header">
+          <p class="eyebrow">Planning</p>
+          <h2>Prochaines étapes</h2>
+        </div>
+        <ul class="timeline">
+          <li>
+            <div class="dot"></div>
+            <div>
+              <p class="label">Audit sécurité</p>
+              <p class="meta">Site Campus Nord · 09:00</p>
+            </div>
+            <span class="pill muted">Aujourd'hui</span>
+          </li>
+          <li>
+            <div class="dot"></div>
+            <div>
+              <p class="label">Livraison matériaux</p>
+              <p class="meta">Hall Détente · 14:30</p>
+            </div>
+            <span class="pill muted">+2 jours</span>
+          </li>
+          <li>
+            <div class="dot"></div>
+            <div>
+              <p class="label">Inspection chantier</p>
+              <p class="meta">Résidence Quai · 11:15</p>
+            </div>
+            <span class="pill muted">+4 jours</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="subpanel">
+        <div class="panel-header">
+          <p class="eyebrow">SAV</p>
+          <h2>Incidents en cours</h2>
+        </div>
+        <div class="ticket">
+          <div>
+            <p class="label">#4587 · Fuite réseau incendie</p>
+            <p class="meta">Résidence Quai — Niveau -1</p>
+          </div>
+          <span class="badge warning">Intervention</span>
+        </div>
+        <div class="ticket">
+          <div>
+            <p class="label">#4581 · Système CVC</p>
+            <p class="meta">Campus Nord — Bâtiment C</p>
+          </div>
+          <span class="badge info">Diagnostic</span>
+        </div>
+        <div class="ticket resolved">
+          <div>
+            <p class="label">#4579 · Éclairage parking</p>
+            <p class="meta">Complexe Sportif — Parking P2</p>
+          </div>
+          <span class="badge success">Résolu</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

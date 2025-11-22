@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  firstName String
+  lastName  String
+  role      Role
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[] @relation("ProjectManager")
+  tasks     Task[]    @relation("TaskAssignee")
+  events    Event[]
+  tickets   Ticket[]  @relation("TicketTechnician")
+  refreshTokens RefreshToken[]
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  TECH
+  SALES
+}
+
+model Client {
+  id            String    @id @default(uuid())
+  companyName   String
+  primaryContact String
+  email         String
+  phone         String?
+  address       String?
+  type          ClientType
+  notes         String?
+  projects      Project[]
+  tickets       Ticket[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum ClientType {
+  PRO
+  INDIVIDUAL
+}
+
+model Project {
+  id           String   @id @default(uuid())
+  clientId     String
+  name         String
+  status       ProjectStatus
+  budget       Decimal  @db.Decimal(12, 2)
+  startDate    DateTime?
+  endDate      DateTime?
+  milestoneDate DateTime?
+  managerId    String?
+  address      String?
+  client       Client   @relation(fields: [clientId], references: [id])
+  manager      User?    @relation("ProjectManager", fields: [managerId], references: [id])
+  tasks        Task[]
+  events       Event[]
+  tickets      Ticket[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  DONE
+  ARCHIVED
+}
+
+model Task {
+  id         String   @id @default(uuid())
+  projectId  String
+  title      String
+  status     TaskStatus
+  startDate  DateTime?
+  endDate    DateTime?
+  assigneeId String?
+  project    Project  @relation(fields: [projectId], references: [id])
+  assignee   User?    @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  BLOCKED
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  projectId String
+  userId    String?
+  type      EventType
+  notes     String?
+  startDate DateTime
+  endDate   DateTime
+  project   Project @relation(fields: [projectId], references: [id])
+  user      User?   @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+enum EventType {
+  PROJECT
+  SERVICE
+  VISIT
+}
+
+model Item {
+  id           String   @id @default(uuid())
+  reference    String   @unique
+  name         String
+  category     String?
+  quantity     Int      @default(0)
+  unit         String?
+  location     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Ticket {
+  id          String   @id @default(uuid())
+  clientId    String
+  projectId   String?
+  technicianId String?
+  status      TicketStatus
+  priority    TicketPriority
+  description String
+  openedAt    DateTime @default(now())
+  client      Client   @relation(fields: [clientId], references: [id])
+  project     Project? @relation(fields: [projectId], references: [id])
+  technician  User?    @relation("TicketTechnician", fields: [technicianId], references: [id])
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
